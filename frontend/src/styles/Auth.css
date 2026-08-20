@@ -1,0 +1,332 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+}
+
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #25252b;
+}
+
+.container {
+  position: relative;
+  width: 750px;
+  height: 450px;
+  border: 2px solid #6cc9f7;
+  box-shadow: 0 0 25px #6cc9f7;
+  overflow: hidden;
+}
+
+.form-box {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 40px;
+  transition: all 0.7s ease;
+}
+
+.form-box.login {
+  left: 0;
+}
+
+.container.active .form-box.login {
+  transform: translateX(-120%);
+  opacity: 0;
+}
+
+.form-box.register {
+  right: 0;
+  padding: 0 60px;
+  opacity: 0;
+}
+
+.container.active .form-box.register {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.form-box h2 {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-box {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 10px 25px 10px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+.input-box input:focus,
+.input-box input:valid {
+  border-bottom: 2px solid #6cc9f7;
+}
+
+.input-box label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+  top: -10px;
+  color: #6cc9f7;
+  font-size: 14px;
+}
+
+.input-box i {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: gray;
+}
+
+.input-box input:focus ~ i,
+.input-box input:valid ~ i {
+  color: #6cc9f7;
+}
+
+.btn {
+  margin-top: 15px;
+  width: 100%;
+  height: 45px;
+  border: 2px solid #6cc9f7;
+  border-radius: 40px;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  overflow: hidden;
+  position: relative;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  height: 300%;
+  width: 100%;
+  background: linear-gradient(#25252b, #6cc9f7, #25252b, #6cc9f7);
+  top: -100%;
+  left: 0;
+  z-index: -1;
+  transition: 0.5s;
+}
+
+.btn:hover::before {
+  top: 0;
+}
+
+.regi-link {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.regi-link .link {
+  color: #6cc9f7;
+  cursor: pointer;
+}
+
+.info-content {
+  position: absolute;
+  width: 50%;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 40px;
+  transition: all 0.7s ease;
+}
+
+.info-content.login {
+  right: 0;
+  text-align: left;
+}
+
+.container.active .info-content.login {
+  transform: translateX(120%);
+  opacity: 0;
+}
+
+.info-content.register {
+  left: 0;
+  text-align: right;
+  opacity: 0;
+}
+
+.container.active .info-content.register {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.info-content h2 {
+  font-size: 36px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.info-content p {
+  font-size: 16px;
+}
+
+/* Shapes */
+.curved-shape {
+  position: absolute;
+  right: 0;
+  top: -5px;
+  width: 850px;
+  height: 600px;
+  background: linear-gradient(45deg, #25252b, #e46033);
+  transform: rotate(10deg) skewY(40deg);
+  transform-origin: bottom right;
+  transition: all 1.5s ease;
+}
+
+.container.active .curved-shape {
+  transform: rotate(0) skewY(0);
+}
+
+.curved-shape2 {
+  position: absolute;
+  left: 250px;
+  top: 100%;
+  width: 850px;
+  height: 700px;
+  background: #25252b;
+  border-top: 3px solid #e46033;
+  transform: rotate(0) skewY(0);
+  transform-origin: bottom left;
+  transition: all 1.5s ease;
+}
+
+.container.active .curved-shape2 {
+  transform: rotate(-11deg) skewY(-41deg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    height: auto;
+  }
+  .form-box,
+  .info-content {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+  }
+  .curved-shape,
+  .curved-shape2 {
+    display: none;
+  }
+}
+
+/* Hide inactive form */
+.form-box.Login {
+  left: 0;
+  padding: 0 40px;
+  z-index: 2;
+  opacity: 1;
+  transition: all 0.7s ease;
+}
+
+.form-box.Register {
+  right: 0;
+  padding: 0 60px;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none; /* Prevent clicking invisible form */
+  transition: all 0.7s ease;
+}
+
+/* When active (signup) */
+.container.active .form-box.Login {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.container.active .form-box.Register {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+/* Info Sections */
+.info-content.login {
+  right: 0;
+  text-align: right;
+  z-index: 1;
+  opacity: 1;
+  pointer-events: auto;
+  width: 50%;          /* Ensure it stays on the right */
+  padding: 0 40px 0 0; /* Align content from right */
+}
+
+.info-content.register {
+  left: 0;
+  text-align: left;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  width: 50%;          /* Ensure it stays on the left */
+  padding: 0 0 0 40px; /* Align content from left */
+}
+
+/* Login Info stays on right side */
+.info-content.login {
+  position: absolute;        /* absolute positioning */
+  top: 50%;                  /* vertical center */
+  right: 40px;               /* distance from right edge */
+  transform: translateY(-50%); /* vertical centering */
+  text-align: right;
+  width: 300px;              /* fixed width to avoid overlap */
+  z-index: 3;                /* above background shapes */
+  opacity: 1;                /* always visible on login */
+  pointer-events: none;      /* prevent clicks */
+}
+
+/* Register info hidden by default, show only when active */
+.container:not(.active) .info-content.register {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.container.active .info-content.register {
+  opacity: 1;
+  pointer-events: auto;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  z-index: 3;
+}
+
