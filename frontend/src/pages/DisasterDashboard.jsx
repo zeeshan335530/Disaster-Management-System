@@ -117,16 +117,48 @@ export default function DisasterDashboard() {
       }
     };
 
-    const loadReports = () => {
-      const reports = JSON.parse(localStorage.getItem("reports")) || [];
-      setUserReports(reports);
-    };
+    const loadReports = async () => {
+  try {
+    const res = await fetch(
+      "https://disaster-management-backend-6lkz.onrender.com/api/reports"
+    );
 
-    const runAll = async () => {
-      await Promise.all([fetchEarthquakes(), fetchWeather()]);
-      loadReports();
-      setLoading(false);
-    };
+    if (!res.ok) {
+      throw new Error("Failed to fetch reports");
+    }
+
+    const data = await res.json();
+
+    const mappedReports = data.map((r) => ({
+      id: r._id,
+      name: r.location,
+      location: r.location,
+      type: r.disasterType,
+      message: r.description,
+      date: r.date
+        ? new Date(r.date).toLocaleString()
+        : "Date unavailable",
+      position:
+        r.latitude != null && r.longitude != null
+          ? [r.latitude, r.longitude]
+          : null,
+    }));
+
+    setUserReports(mappedReports);
+  } catch (err) {
+    console.error("Reports fetch error:", err);
+  }
+};
+
+   const runAll = async () => {
+  await Promise.all([
+    fetchEarthquakes(),
+    fetchWeather(),
+    loadReports(),
+  ]);
+
+  setLoading(false);
+};
 
     runAll();
     const interval = setInterval(runAll, 300000);
